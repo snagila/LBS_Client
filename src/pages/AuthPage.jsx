@@ -1,7 +1,7 @@
 import React from "react";
 import authImage from "../assets/authImage.png";
 import { Col, Container, Image, Row, Stack } from "react-bootstrap";
-// import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/AuthForm";
 
 const AuthPage = () => {
   return (
@@ -16,7 +16,7 @@ const AuthPage = () => {
           </Col>
 
           <Col className="d-flex justify-content-center align-items-center">
-            {/* <AuthForm /> */}
+            <AuthForm />
           </Col>
         </Row>
       </Container>
