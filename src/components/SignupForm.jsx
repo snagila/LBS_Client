@@ -1,36 +1,40 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import useForm from "../hooks/useForm";
 import CustomInput from "./CustomInput";
+import { createUser } from "../axios/userAxios";
 
 const initialValue = {
   first_name: "",
   last_name: "",
   email: "",
   password: "",
+  phone: "",
   confirm_password: "",
 };
 const SignupForm = () => {
-  const useFormPayload = useForm(initialValue);
-  const { formData, setFormData, handleOnChange } = useFormPayload;
+  const { formData, setFormData, handleOnchange } = useForm(initialValue);
 
-  // handle form submit
+  //   handle form submit
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    const result = await createUser(formData);
+    setFormData(initialValue);
   };
   return (
     <>
-      <Form onSubmit={handleOnSubmit}>
+      <Form onSubmit={(e) => handleOnSubmit(e)}>
         <h2 className="text-center mb-4">Create an Account</h2>
 
         <Row>
           <Col>
             <CustomInput
               label="First Name"
-              handleOnChange={handleOnChange}
+              handleOnChange={handleOnchange}
               inputAttributes={{
                 type: "text",
                 name: "first_name",
-                value: formData.name,
+                value: formData.first_name,
                 placeholder: "Enter your first name",
                 required: true,
               }}
@@ -40,7 +44,7 @@ const SignupForm = () => {
           <Col>
             <CustomInput
               label="Last Name"
-              handleOnChange={handleOnChange}
+              handleOnChange={handleOnchange}
               inputAttributes={{
                 type: "text",
                 name: "last_name",
@@ -54,7 +58,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Phone"
-          handleOnChange={handleOnChange}
+          handleOnChange={handleOnchange}
           inputAttributes={{
             type: "tel",
             name: "phone",
@@ -66,7 +70,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Email"
-          handleOnChange={handleOnChange}
+          handleOnChange={handleOnchange}
           inputAttributes={{
             type: "email",
             name: "email",
@@ -78,7 +82,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Password"
-          handleOnChange={handleOnChange}
+          handleOnChange={handleOnchange}
           inputAttributes={{
             type: "password",
             name: "password",
@@ -90,7 +94,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Confirm Password"
-          handleOnChange={handleOnChange}
+          handleOnChange={handleOnchange}
           inputAttributes={{
             type: "password",
             name: "confirm_password",
