@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useForm = (initialFormData) => {
   const [formData, setFormData] = useState(initialFormData);
-  const handleOnchange = (e) => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -12,7 +12,7 @@ const useForm = (initialFormData) => {
   return {
     formData,
     setFormData,
-    handleOnchange,
+    handleOnChange,
   };
 };
 export default useForm;

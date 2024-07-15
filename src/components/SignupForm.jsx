@@ -18,7 +18,8 @@ const SignupForm = () => {
   //   handle form submit
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const result = await createUser(formData);
+    const { confirm_password, ...rest } = formData;
+    createUser(rest);
     setFormData(initialValue);
   };
   return (
