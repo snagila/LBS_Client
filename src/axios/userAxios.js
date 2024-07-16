@@ -14,6 +14,9 @@ export const createUser = (userObj) => {
 
 // login user
 export const loginUser = (userObj) => {
-  const response = axios.get().then().catch();
+  const response = axios
+    .post(`${USER_API_URL}/login`, userObj)
+    .then((res) => res.data)
+    .catch((error) => console.log(error.message));
   return response;
 };

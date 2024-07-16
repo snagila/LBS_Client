@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import CustomInput from "./CustomInput";
 import useForm from "../hooks/useForm";
+import { loginUser } from "../axios/userAxios";
 
 const initialFormData = {
   email: "",
@@ -12,8 +13,10 @@ const LoginForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
+    // call axios to hit login endpoint
+    const result = await loginUser(formData);
   };
   return (
     <>
