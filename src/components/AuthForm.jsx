@@ -4,12 +4,16 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
 const AuthForm = () => {
-  const [isLoginForm, setIsLoginForm] = useState(false);
+  const [isLoginForm, setIsLoginForm] = useState(true);
   return (
     <>
       <Container>
         <Stack>
-          {isLoginForm ? <LoginForm /> : <SignupForm />}
+          {isLoginForm ? (
+            <LoginForm />
+          ) : (
+            <SignupForm setIsLoginForm={setIsLoginForm} />
+          )}
           {isLoginForm ? (
             <p>
               Don&apos;t have an account?

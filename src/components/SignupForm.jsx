@@ -12,14 +12,16 @@ const initialValue = {
   phone: "",
   confirm_password: "",
 };
-const SignupForm = () => {
-  const { formData, setFormData, handleOnchange } = useForm(initialValue);
+
+const SignupForm = ({ setIsLoginForm }) => {
+  const { formData, setFormData, handleOnChange } = useForm(initialValue);
 
   //   handle form submit
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const { confirm_password, ...rest } = formData;
     createUser(rest);
+    setIsLoginForm(true);
     setFormData(initialValue);
   };
   return (
@@ -31,7 +33,7 @@ const SignupForm = () => {
           <Col>
             <CustomInput
               label="First Name"
-              handleOnChange={handleOnchange}
+              handleOnChange={handleOnChange}
               inputAttributes={{
                 type: "text",
                 name: "first_name",
@@ -45,7 +47,7 @@ const SignupForm = () => {
           <Col>
             <CustomInput
               label="Last Name"
-              handleOnChange={handleOnchange}
+              handleOnChange={handleOnChange}
               inputAttributes={{
                 type: "text",
                 name: "last_name",
@@ -59,7 +61,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Phone"
-          handleOnChange={handleOnchange}
+          handleOnChange={handleOnChange}
           inputAttributes={{
             type: "tel",
             name: "phone",
@@ -71,7 +73,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Email"
-          handleOnChange={handleOnchange}
+          handleOnChange={handleOnChange}
           inputAttributes={{
             type: "email",
             name: "email",
@@ -83,7 +85,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Password"
-          handleOnChange={handleOnchange}
+          handleOnChange={handleOnChange}
           inputAttributes={{
             type: "password",
             name: "password",
@@ -95,7 +97,7 @@ const SignupForm = () => {
 
         <CustomInput
           label="Confirm Password"
-          handleOnChange={handleOnchange}
+          handleOnChange={handleOnChange}
           inputAttributes={{
             type: "password",
             name: "confirm_password",

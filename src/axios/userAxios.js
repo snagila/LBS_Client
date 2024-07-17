@@ -20,3 +20,20 @@ export const loginUser = (userObj) => {
     .catch((error) => console.log(error.message));
   return response;
 };
+
+// PRIVATE ROUTES
+
+// get user
+export const getUser = () => {
+  const accessJWT = sessionStorage.getItem("accessJWT");
+
+  const response = axios
+    .get(USER_API_URL, {
+      headers: {
+        Authorization: accessJWT,
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => console.log(error.message));
+  return response;
+};

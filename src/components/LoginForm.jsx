@@ -3,6 +3,9 @@ import { Button, Form } from "react-bootstrap";
 import CustomInput from "./CustomInput";
 import useForm from "../hooks/useForm";
 import { loginUser } from "../axios/userAxios";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { getUserAction } from "../redux/user/userAction";
 
 const initialFormData = {
   email: "",
@@ -12,11 +15,24 @@ const initialFormData = {
 const LoginForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
+  const dispatch = useDispatch();
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     // call axios to hit login endpoint
     const result = await loginUser(formData);
+    console.log(result);
+    if (result.status === "error") {
+      return toast.error(result.message);
+    }
+
+    // IF SUCCESSFUL LOGIN
+    // store accessJWT in session storage  and refreshJWT in local storage
+    sessionStorage.setItem("accessJWT", result.data.accessJWT);
+    localStorage.setItem("refreshJWT", result.data.refreshJWT);
+
+    // then dispatch an action to get user info
+    dispatch(getUserAction());
   };
   return (
     <>
