@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import CustomInput from "./CustomInput";
 import useForm from "../hooks/useForm";
 import { loginUser } from "../axios/userAxios";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserAction } from "../redux/user/userAction";
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {
   email: "",
@@ -21,7 +22,7 @@ const LoginForm = () => {
     e.preventDefault();
     // call axios to hit login endpoint
     const result = await loginUser(formData);
-    console.log(result);
+
     if (result.status === "error") {
       return toast.error(result.message);
     }
@@ -34,6 +35,16 @@ const LoginForm = () => {
     // then dispatch an action to get user info
     dispatch(getUserAction());
   };
+
+  // logic to redirect user to dashboard once logged in
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?._id) {
+      navigate("/admin");
+    }
+  }, [user._id, navigate]);
   return (
     <>
       <Form onSubmit={handleOnSubmit}>
