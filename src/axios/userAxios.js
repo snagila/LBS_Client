@@ -37,3 +37,16 @@ export const getUser = () => {
     .catch((error) => console.log(error.message));
   return response;
 };
+
+// get accesstoken based on refresh token
+export const getAccessToken = () => {
+  const response = axios
+    .get(`${USER_API_URL}/accessJWT`, {
+      headers: {
+        Authorization: localStorage.getItem("refreshJWT"),
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => console.log(error.message));
+  return response;
+};

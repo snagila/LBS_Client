@@ -5,7 +5,7 @@ import useForm from "../hooks/useForm";
 import { loginUser } from "../axios/userAxios";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserAction } from "../redux/user/userAction";
+import { autoLoginAction, getUserAction } from "../redux/user/userAction";
 import { useNavigate } from "react-router-dom";
 
 const initialFormData = {
@@ -41,10 +41,15 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // if logged in redirect to required route
     if (user?._id) {
       navigate("/admin");
     }
-  }, [user._id, navigate]);
+    // if not logged in try auto logging in
+    if (!user?._id) {
+      dispatch(autoLoginAction());
+    }
+  }, [user._id, navigate, dispatch]);
   return (
     <>
       <Form onSubmit={handleOnSubmit}>

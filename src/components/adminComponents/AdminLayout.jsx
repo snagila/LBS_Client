@@ -1,11 +1,19 @@
-import React from "react";
-import { Card, Col, Container, Row, Stack } from "react-bootstrap";
-import { BsPersonCheck } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Button, Card, Col, Container, Row, Stack } from "react-bootstrap";
+import { BsBook, BsBoxSeam, BsPerson, BsPersonCheck } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import SidebarItem from "./SidebarItem";
+import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   const { user } = useSelector((state) => state.user);
   const { first_name, last_name } = user;
+  const [activeItem, setActiveItem] = useState("Dashboard");
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch();
+  };
   return (
     <>
       <Container fluid>
@@ -23,8 +31,44 @@ const AdminLayout = () => {
               </Card>
 
               {/* Menu Items */}
-              <Stack></Stack>
+              <Stack className="my-4">
+                <SidebarItem
+                  icon={<BsBoxSeam />}
+                  label="Dashboard"
+                  path="/adim/dashboard"
+                  activeItem={activeItem}
+                  setActiveItem={setActiveItem}
+                />
+                <SidebarItem
+                  icon={<BsBook />}
+                  label="Books"
+                  path="/adim/books"
+                  activeItem={activeItem}
+                  setActiveItem={setActiveItem}
+                />
+                <SidebarItem
+                  icon={<BsPerson />}
+                  label="Users"
+                  path="/adim/users"
+                  activeItem={activeItem}
+                  setActiveItem={setActiveItem}
+                />
+              </Stack>
+              <div className="mt-auto">
+                <Button
+                  variant="outline-danger"
+                  className="w-100"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </div>
             </Stack>
+          </Col>
+          <Col style={{ marginLeft: "25%" }}>
+            <div className="vh-100 vw-90 pt-4">
+              <Outlet />
+            </div>
           </Col>
         </Row>
       </Container>
