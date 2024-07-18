@@ -49,7 +49,7 @@ const LoginForm = () => {
     if (!user?._id) {
       dispatch(autoLoginAction());
     }
-  }, [user._id, navigate, dispatch]);
+  }, [user?._id, navigate, dispatch]);
   return (
     <>
       <Form onSubmit={handleOnSubmit}>

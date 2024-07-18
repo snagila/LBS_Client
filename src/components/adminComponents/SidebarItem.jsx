@@ -6,8 +6,9 @@ const SidebarItem = ({ icon, label, path, activeItem, setActiveItem }) => {
   return (
     <Link className="text-decoration-none p-1 me-auto" to={path}>
       <Button
-        variant={activeItem === label ? "info" : "outline-infos"}
-        className="fw-bold text-dark w-100 text-start"
+        variant={activeItem === label ? "info" : "outline-info"}
+        className="fw-bold text-dark  text-start "
+        onClick={() => setActiveItem(label)}
       >
         {icon}
         {label}

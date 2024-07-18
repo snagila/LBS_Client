@@ -4,6 +4,7 @@ import { BsBook, BsBoxSeam, BsPerson, BsPersonCheck } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import SidebarItem from "./SidebarItem";
 import { Outlet } from "react-router-dom";
+import { logoutUserAction } from "../../redux/user/userAction";
 
 const AdminLayout = () => {
   const { user } = useSelector((state) => state.user);
@@ -12,7 +13,7 @@ const AdminLayout = () => {
 
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch();
+    dispatch(logoutUserAction());
   };
   return (
     <>
@@ -35,21 +36,21 @@ const AdminLayout = () => {
                 <SidebarItem
                   icon={<BsBoxSeam />}
                   label="Dashboard"
-                  path="/adim/dashboard"
+                  path="/admin/dashboard"
                   activeItem={activeItem}
                   setActiveItem={setActiveItem}
                 />
                 <SidebarItem
                   icon={<BsBook />}
                   label="Books"
-                  path="/adim/books"
+                  path="/admin/books"
                   activeItem={activeItem}
                   setActiveItem={setActiveItem}
                 />
                 <SidebarItem
                   icon={<BsPerson />}
                   label="Users"
-                  path="/adim/users"
+                  path="/admin/users"
                   activeItem={activeItem}
                   setActiveItem={setActiveItem}
                 />

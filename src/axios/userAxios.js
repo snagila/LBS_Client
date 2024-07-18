@@ -50,3 +50,21 @@ export const getAccessToken = () => {
     .catch((error) => console.log(error.message));
   return response;
 };
+
+// logout user
+export const logoutUser = () => {
+  console.log(sessionStorage.getItem("accessJWT"));
+  const response = axios
+    .post(
+      `${USER_API_URL}/logout`,
+      {},
+      {
+        headers: {
+          Authorization: sessionStorage.getItem("accessJWT"),
+        },
+      }
+    )
+    .then((res) => res.data)
+    .catch((error) => console.log(error.message));
+  return response;
+};
